@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=XSession
+Exec=xfce4-session
+TryExec=xfce4-session
+Name=XFce4
+Name[sv]=Xfce
+Comment=The Cholesterol Free Desktop Environment, a desktop environment reminiscent of CDE
+Comment[nl]=The Cholesterol Free Desktop Environment. Een desktop environment die herrinnert aan CDE
+Comment[sr]=„The Cholesterol Free Desktop Environment“, радно окружење које подсећа на CDE
+Comment[sv]=Den kolesterolfria skrivbordsmiljön, en skrivbordsmiljö som påminner om CDE
