@@ -1,8 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
-Type=XSession
-Exec=xfce4-session
-TryExec=xfce4-session
+Exec=startxfce4
 Name=XFce4
 Name[sv]=Xfce
 Comment=The Cholesterol Free Desktop Environment, a desktop environment reminiscent of CDE
