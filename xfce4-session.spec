@@ -1,5 +1,5 @@
-Summary:	XFce Session manager
-Summary(pl):	Zarz±dca sesji XFce
+Summary:	Xfce Session manager
+Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
 Version:	4.1.99.2
 Release:	1
@@ -21,47 +21,47 @@ Requires:	xfce-mcs-manager >= 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-xfce4-session is the session manager for the XFce desktop environment.
+xfce4-session is the session manager for the Xfce desktop environment.
 
 %description -l pl
-xfce4-session jest zarz±dc± sesji dla ¶rodowiska XFce.
+xfce4-session jest zarz±dc± sesji dla ¶rodowiska Xfce.
 
 %package libs
-Summary:	XFce Session Manager library
-Summary(pl):	Biblioteka zarz±dcy sesji dla ¶rodowiska XFce
+Summary:	Xfce Session Manager library
+Summary(pl):	Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Libraries
 Requires:	libxfcegui4 >= 4.1.91
 
 %description libs
-XFce Session Manager library.
+Xfce Session Manager library.
 
 %description libs -l pl
-Biblioteka zarz±dcy sesji dla ¶rodowiska XFce.
+Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce.
 
 %package devel
-Summary:	Header files for XFce Session Manager library
-Summary(pl):	Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska XFce
+Summary:	Header files for Xfce Session Manager library
+Summary(pl):	Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4-devel >= 4.1.91
 
 %description devel
-Header files for XFce Session Manager library.
+Header files for Xfce Session Manager library.
 
 %description devel -l pl
-Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska XFce.
+Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska Xfce.
 
 %package static
-Summary:	Static XFce Session Manager library
-Summary(pl):	Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska XFce
+Summary:	Static Xfce Session Manager library
+Summary(pl):	Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static XFce Session Manager library.
+Static Xfce Session Manager library.
 
 %description static -l pl
-Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska XFce.
+Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska Xfce.
 
 %prep
 %setup -q
