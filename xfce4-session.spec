@@ -10,9 +10,9 @@ Group:		X11/Applications
 Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	a0a08268026c3a2533a59d21403b5fd6
 URL:		http://www.xfce.org/
-BuildRequires:  autoconf >= 2.50
-BuildRequires:  automake
-BuildRequires:  libtool
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	libxfcegui4-devel >= 4.1.91
 BuildRequires:	libxfce4mcs-devel >= 4.1.91
 BuildRequires:	xfce-mcs-manager-devel >= 4.1.0
