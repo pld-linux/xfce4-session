@@ -1,24 +1,24 @@
 
 # What about two header files? Is there need for devel package?
 
-%define		_snap 20040806
+%define		_snap 20040813
 
 Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
 Name:		xfce4-session
-Version:	4.2.0
+Version:	4.1.14
 Release:	0.%{_snap}.1
 License:	BSD
 Group:		X11/Applications
 Source0:	http://ep09.pld-linux.org/~havner/xfce4/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	3bd3b4c9c19b5ae39ff9acead2ba91cc
+# Source0-md5:	2f1f1fe6a79a0b62fbcbc542402037e5
 URL:		http://www.xfce.org/
-BuildRequires:	libxfcegui4-devel >= %{version}
-BuildRequires:	libxfce4mcs-devel >= %{version}
-BuildRequires:	xfce-mcs-manager-devel >= %{version}
-Requires:	libxfcegui4 >= %{version}
-Requires:	libxfce4mcs >= %{version}
-Requires:	xfce-mcs-manager >= %{version}
+BuildRequires:	libxfcegui4-devel >= 4.1.24
+BuildRequires:	libxfce4mcs-devel >= 4.1.1
+BuildRequires:	xfce-mcs-manager-devel >= 4.1.0
+Requires:	libxfcegui4 >= 4.1.24
+Requires:	libxfce4mcs >= 4.1.1
+Requires:	xfce-mcs-manager >= 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
