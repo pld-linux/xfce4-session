@@ -1,15 +1,17 @@
-#
-%define		snap 20040617
-#
+
+# What about two header files? Is there need for devel package?
+
+%define		_snap 20040806
+
 Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
 Name:		xfce4-session
-Version:	4.1.0
-Release:	0.%{snap}.1
+Version:	4.2.0
+Release:	0.%{_snap}.1
 License:	BSD
 Group:		X11/Applications
-Source0:	%{name}-snap-%{snap}.tar.bz2
-# Source0-md5:	ba52e510e728447551be7e51bd744f11
+Source0:	http://ep09.pld-linux.org/~havner/xfce4/%{name}-%{_snap}.tar.bz2
+# Source0-md5:	3bd3b4c9c19b5ae39ff9acead2ba91cc
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	libxfce4mcs-devel >= %{version}
@@ -55,13 +57,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
 %{_mandir}/man1/%{name}.1.*
 
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
+#%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
 %attr(755,root,root) %{_bindir}/*
 #%attr(4755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/*
 %attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
 %{_sysconfdir}/xdg/%{name}/%{name}.rc
 
-%{_datadir}/themes/*/xfsm4
-%{_desktopdir}/xfce-session-settings.desktop
-%{_iconsdir}/hicolor/*/apps/*.png
+%{_datadir}/themes/*/balou
+%{_desktopdir}/*.desktop
+%{_iconsdir}/hicolor/*/*/*
