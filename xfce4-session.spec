@@ -46,6 +46,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 	
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/splash/engines/*.{la,a}
 
 %find_lang %{name}
 
