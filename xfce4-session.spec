@@ -68,3 +68,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/themes/*/balou
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*
+
+%docdir %{_datadir}/xfce4/doc
+%{_datadir}/xfce4/doc/C/*
