@@ -1,13 +1,13 @@
-Summary: 	XFce Session manager
+Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
-Name: 		xfce4-session
-Version: 	0.1.1
-Release: 	1
+Name:		xfce4-session
+Version:	0.1.1
+Release:	1
 License:	BSD
-Group:          X11/Applications
-Source0: 	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
-URL:            http://www.xfce.org/
-BuildRequires: 	libxfcegui4-devel >= 3.99.2
+Group:		X11/Applications
+Source0:	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
+URL:		http://www.xfce.org/
+BuildRequires:	libxfcegui4-devel >= 3.99.2
 BuildRequires:	libxfce4mcs-devel >= 3.99.2
 BuildRequires:	xfce-mcs-manager-devel >= 3.99.2
 Requires:	libxfcegui4 >= 3.99.2
