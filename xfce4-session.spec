@@ -10,11 +10,14 @@ Group:		X11/Applications
 Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	a0a08268026c3a2533a59d21403b5fd6
 URL:		http://www.xfce.org/
-BuildRequires:	libxfcegui4-devel >= 4.1.24
-BuildRequires:	libxfce4mcs-devel >= 4.1.1
+BuildRequires:  autoconf >= 2.50
+BuildRequires:  automake
+BuildRequires:  libtool
+BuildRequires:	libxfcegui4-devel >= 4.1.91
+BuildRequires:	libxfce4mcs-devel >= 4.1.91
 BuildRequires:	xfce-mcs-manager-devel >= 4.1.0
-Requires:	libxfcegui4 >= 4.1.24
-Requires:	libxfce4mcs >= 4.1.1
+Requires:	libxfcegui4 >= 4.1.91
+Requires:	libxfce4mcs >= 4.1.91
 Requires:	xfce-mcs-manager >= 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
