@@ -1,12 +1,15 @@
+#
+%define		snap 20040617
+#
 Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
 Name:		xfce4-session
-Version:	0.1.1
-Release:	2
+Version:	4.1.0
+Release:	0.%{snap}.1
 License:	BSD
 Group:		X11/Applications
-Source0:	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
-# Source0-md5:	a459bb78022158dfb90d249f4a8753e1
+Source0:	%{name}-snap-%{snap}.tar.bz2
+# Source0-md5:	ba52e510e728447551be7e51bd744f11
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 3.99.2
 BuildRequires:	libxfce4mcs-devel >= 3.99.2
@@ -23,10 +26,14 @@ xfce4-session is the session manager for the XFce desktop environment
 xfce4-session jest zarz±dc± sesji dla ¶rodowiska XFce
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
-cp -f /usr/share/automake/config.sub .
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoheader}
+%{__automake}
+%{__autoconf}
 %configure
 %{__make}
 
@@ -48,6 +55,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
 %attr(755,root,root) %{_bindir}/*
-%attr(4755,root,root) %{_sbindir}/*
+#%attr(4755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_libdir}/*
 %attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
-%{_datadir}/xfce4/splash
+%{_sysconfdir}/xdg/%{name}/%{name}.rc
+
+%{_datadir}/themes/*/xfsm4
+%{_desktopdir}/xfce-session-settings.desktop
+%{_iconsdir}/hicolor/*/apps/*.png
+
+%{_mandir}/man1/%{name}.1.*
