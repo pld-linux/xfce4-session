@@ -26,7 +26,7 @@ xfce4-session jest menad¿erem sesji dla ¶rodowiska XFce
 
 %build
 %configure
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
