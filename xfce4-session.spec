@@ -6,6 +6,7 @@ Release:	1
 License:	BSD
 Group:		X11/Applications
 Source0:	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
+# Source0-md5:	a459bb78022158dfb90d249f4a8753e1
 Source1:	XFce4.desktop
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 3.99.2
