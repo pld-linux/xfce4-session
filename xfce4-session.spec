@@ -35,9 +35,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 	
-install -d $RPM_BUILD_ROOT%{datadir}/xsessions
+install -d $RPM_BUILD_ROOT%{_datadir}/xsessions
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{datadir}/xsessions
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/xsessions
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
 
