@@ -16,6 +16,9 @@ BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	libxfcegui4 >= %{version}
+Requires:	libxfce4mcs >= %{version}
+Requires:	xfce-mcs-manager >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
