@@ -7,7 +7,7 @@ License:	BSD
 Group:		X11/Applications
 Source0:	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
 # Source0-md5:	a459bb78022158dfb90d249f4a8753e1
-Source1:	XFce4.desktop
+Source1:	xfce4-xsession.desktop
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 3.99.2
 BuildRequires:	libxfce4mcs-devel >= 3.99.2
@@ -38,7 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 	
 install -d $RPM_BUILD_ROOT%{_datadir}/xsessions
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/xsessions
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/xsessions/xfce4.desktop
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
 
@@ -55,4 +55,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(4755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
 %{_datadir}/xfce4/splash
-%{_datadir}/xsessions/XFce4.desktop
+%{_datadir}/xsessions/xfce4.desktop
