@@ -1,5 +1,5 @@
 Summary: 	XFce Session manager
-Summary(pl):	Menad¿er sesji XFce
+Summary(pl):	Zarz±dca sesji XFce
 Name: 		xfce4-session
 Version: 	0.1.1
 Release: 	1
@@ -19,7 +19,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 xfce4-session is the session manager for the XFce desktop environment
 
 %description -l pl
-xfce4-session jest menad¿erem sesji dla ¶rodowiska XFce
+xfce4-session jest zarz±dc± sesji dla ¶rodowiska XFce
 
 %prep
 %setup -q
@@ -30,19 +30,22 @@ xfce4-session jest menad¿erem sesji dla ¶rodowiska XFce
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT mandir=%{_mandir}
+	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
-%{_datadir}/xfce4/splash/
-%{_datadir}/locale/
+%{_datadir}/xfce4/splash
 %attr(755,root,root) %{_bindir}/*
 %attr(4755,root,root) %{_sbindir}/*
-%dir %{_libdir}/xfce4/mcs-plugins/
 %attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
