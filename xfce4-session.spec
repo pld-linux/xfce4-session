@@ -27,6 +27,7 @@ xfce4-session jest zarz±dc± sesji dla ¶rodowiska XFce
 %setup -q
 
 %build
+cp -f /usr/share/automake/config.sub .
 %configure
 %{__make}
 
