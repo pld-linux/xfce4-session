@@ -11,12 +11,12 @@ Group:		X11/Applications
 Source0:	%{name}-snap-%{snap}.tar.bz2
 # Source0-md5:	ba52e510e728447551be7e51bd744f11
 URL:		http://www.xfce.org/
-BuildRequires:	libxfcegui4-devel >= 3.99.2
-BuildRequires:	libxfce4mcs-devel >= 3.99.2
-BuildRequires:	xfce-mcs-manager-devel >= 3.99.2
-Requires:	libxfcegui4 >= 3.99.2
-Requires:	libxfce4mcs >= 3.99.2
-Requires:	xfce-mcs-manager >= 3.99.2
+BuildRequires:	libxfcegui4-devel >= %{version}
+BuildRequires:	libxfce4mcs-devel >= %{version}
+BuildRequires:	xfce-mcs-manager-devel >= %{version}
+Requires:	libxfcegui4 >= %{version}
+Requires:	libxfce4mcs >= %{version}
+Requires:	xfce-mcs-manager >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,6 +53,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
+%{_mandir}/man1/%{name}.1.*
+
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
 %attr(755,root,root) %{_bindir}/*
 #%attr(4755,root,root) %{_sbindir}/*
@@ -63,5 +65,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/themes/*/xfsm4
 %{_desktopdir}/xfce-session-settings.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
-
-%{_mandir}/man1/%{name}.1.*
