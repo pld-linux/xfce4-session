@@ -6,6 +6,7 @@ Release:	1
 License:	BSD
 Group:		X11/Applications
 Source0:	http://troll.2000-plus.pl/SOURCES/%{name}-%{version}.tar.gz
+Source1:	XFce4.desktop
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 3.99.2
 BuildRequires:	libxfce4mcs-devel >= 3.99.2
@@ -33,6 +34,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+	
+install -d $RPM_BUILD_ROOT%{datadir}/xsessions
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{datadir}/xsessions
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
 
@@ -45,7 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/xfce4/*
-%{_datadir}/xfce4/splash
 %attr(755,root,root) %{_bindir}/*
 %attr(4755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
+%{_datadir}/xfce4/splash
+%{_datadir}/xsessions/XFce4.desktop
