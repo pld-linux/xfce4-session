@@ -2,8 +2,8 @@ Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
 Version:	4.1.99.3
-Release:	1
-License:	BSD
+Release:	2
+License:	GPL v2
 Group:		X11/Applications
 Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	9d1a6aa43e6e9b56d631805e227af2c8
@@ -12,12 +12,10 @@ URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
-BuildRequires:	libxfce4mcs-devel >= 4.1.91
-BuildRequires:	libxfcegui4-devel >= 4.1.91
-BuildRequires:	xfce-mcs-manager-devel >= 4.1.0
+BuildRequires:	libxfce4mcs-devel >= %{version}
+BuildRequires:	libxfcegui4-devel >= %{version}
+BuildRequires:	xfce-mcs-manager-devel >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libxfce4mcs >= 4.1.91
-Requires:	xfce-mcs-manager >= 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,7 +28,7 @@ xfce4-session jest zarz±dc± sesji dla ¶rodowiska Xfce.
 Summary:	Xfce Session Manager library
 Summary(pl):	Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Libraries
-Requires:	libxfcegui4 >= 4.1.91
+Requires:	libxfcegui4 >= %{version}
 
 %description libs
 Xfce Session Manager library.
@@ -43,7 +41,7 @@ Summary:	Header files for Xfce Session Manager library
 Summary(pl):	Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libxfcegui4-devel >= 4.1.91
+Requires:	libxfcegui4-devel >= %{version}
 
 %description devel
 Header files for Xfce Session Manager library.
