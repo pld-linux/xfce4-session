@@ -1,17 +1,14 @@
 
 # What about two header files? Is there need for devel package?
-
-%define		_snap 20040816
-
 Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
 Name:		xfce4-session
-Version:	4.1.14
-Release:	0.%{_snap}.1
+Version:	4.1.90
+Release:	0.1
 License:	BSD
 Group:		X11/Applications
-Source0:	http://ep09.pld-linux.org/~havner/xfce4/%{name}-%{_snap}.tar.bz2
-# Source0-md5:	c0d70ca4be97b690ae804c1ab68f7ff2
+Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	18191d6fd1f9ae5bc8b454affe3e6071
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 4.1.24
 BuildRequires:	libxfce4mcs-devel >= 4.1.1
@@ -28,7 +25,7 @@ xfce4-session is the session manager for the XFce desktop environment
 xfce4-session jest zarz±dc± sesji dla ¶rodowiska XFce
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
