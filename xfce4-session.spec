@@ -1,12 +1,12 @@
 Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.1.99.2
+Version:	4.1.99.3
 Release:	1
 License:	BSD
 Group:		X11/Applications
 Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	967a19a7a05127f63cba8fd350f98191
+# Source0-md5:	9d1a6aa43e6e9b56d631805e227af2c8
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -67,7 +67,7 @@ Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska Xfce.
 %setup -q
 %patch0 -p1
 
-mv -f po/{no,nb}.po
+mv -f po/{nb_NO,nb}.po
 mv -f po/{pt_PT,pt}.po
 
 %build
