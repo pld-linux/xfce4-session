@@ -3,12 +3,12 @@
 Summary:	XFce Session manager
 Summary(pl):	Zarz±dca sesji XFce
 Name:		xfce4-session
-Version:	4.1.90
-Release:	0.1
+Version:	4.1.91
+Release:	1
 License:	BSD
 Group:		X11/Applications
 Source0:	ftp://ftp.berlios.de/pub/xfce-goodies/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	18191d6fd1f9ae5bc8b454affe3e6071
+# Source0-md5:	bb61d9bb1f1265e61b9de2d015389525
 URL:		http://www.xfce.org/
 BuildRequires:	libxfcegui4-devel >= 4.1.24
 BuildRequires:	libxfce4mcs-devel >= 4.1.1
