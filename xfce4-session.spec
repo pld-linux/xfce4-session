@@ -11,9 +11,11 @@ Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
+BuildRequires:	pkgconfig
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4 >= %{version}
