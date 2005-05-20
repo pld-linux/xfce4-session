@@ -1,12 +1,12 @@
 Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.2.1
+Version:	4.2.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:        http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	d9941a2a2e85a05e4e8677301db0ab2a
+# Source0-md5:	4d2f36ab0d4fa4b62a80b762c127d3aa
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -16,6 +16,7 @@ BuildRequires:	libtool
 BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
+BuildRequires:	xfce4-dev-tools
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4 >= %{version}
@@ -75,7 +76,7 @@ mv -f po/{pt_PT,pt}.po
 
 %build
 %{__libtoolize}
-%{__aclocal} -I m4
+%{__aclocal} -I %{_datadir}/xfce4/dev-tools/m4macros
 %{__autoheader}
 %{__automake}
 %{__autoconf}
@@ -122,6 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %docdir %{_datadir}/xfce4/doc
 %{_datadir}/xfce4/doc/C/*.html
 %{_datadir}/xfce4/doc/C/images/*.png
+%{_datadir}/xfce4/doc/fr/*.html
+%{_datadir}/xfce4/doc/fr/images/*.png
 
 %files libs
 %defattr(644,root,root,755)
