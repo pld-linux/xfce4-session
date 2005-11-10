@@ -1,12 +1,12 @@
 Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.2.2
+Version:	4.2.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:        http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	4d2f36ab0d4fa4b62a80b762c127d3aa
+# Source0-md5:	e3685ace007f065eadbd7acce6fa61e8
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -80,7 +80,8 @@ mv -f po/{pt_PT,pt}.po
 %{__autoheader}
 %{__automake}
 %{__autoconf}
-%configure
+%configure \
+	ICEAUTH=/usr/X11R6/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
 %{__make} \
 	libxfsm_4_2_la_LIBADD="\$(LIBX11_LIBS) \$(LIBXFCEGUI4_LIBS)"
@@ -121,10 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*.1*
 
 %docdir %{_datadir}/xfce4/doc
-%{_datadir}/xfce4/doc/C/*.html
-%{_datadir}/xfce4/doc/C/images/*.png
-%lang(fr) %{_datadir}/xfce4/doc/fr/*.html
-%lang(fr) %{_datadir}/xfce4/doc/fr/images/*.png
+%{_datadir}/xfce4/doc/C/*
+%lang(fr) %{_datadir}/xfce4/doc/fr/*
+%lang(he) %{_datadir}/xfce4/doc/he/*
 
 %files libs
 %defattr(644,root,root,755)

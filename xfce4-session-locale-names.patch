@@ -1,14 +1,11 @@
-diff -urN xfce4-session-4.2.2/configure.ac fix/xfce4-session-4.2.2/configure.ac
---- xfce4-session-4.2.2/configure.ac	2005-05-15 10:21:10.000000000 +0200
-+++ fix/xfce4-session-4.2.2/configure.ac	2005-05-20 04:13:17.000000000 +0200
-@@ -62,8 +62,8 @@
- 
+--- xfce4-session-4.2.3/configure.ac.orig	2005-11-05 18:08:59.000000000 +0100
++++ xfce4-session-4.2.3/configure.ac	2005-11-10 04:34:25.000000000 +0100
+@@ -63,7 +63,7 @@
  dnl Check for i18n support
- BM_I18N([xfce4-session], [ar az be bn_IN ca cs da de el en_GB es es_MX et eu fa
--                          fi fr gu he hi hu it ja ko lt mr ms nl nb_NO pa
--			  pl pt_BR pt_PT ro ru sv sk ta tr uk vi zh_CN zh_TW])
-+                          fi fr gu he hi hu it ja ko lt mr ms nl nb pa
-+			  pl pt_BR pt ro ru sv sk ta tr uk vi zh_CN zh_TW])
+ BM_I18N([xfce4-session], [af ar az be bn_IN ca cs da de el en_GB eo es es_MX
+ 			  et eu fa fi fr gu he hi hu it ja ko ku lt mr ms nl
+-			  nb_NO pa pl pt_BR pt_PT ro ru sk sl sv ta tr uk vi
++			  nb pa pl pt_BR pt ro ru sk sl sv ta tr uk vi
+ 			  zh_CN zh_TW])
  
  dnl Check for required packages
- BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.2.0])
