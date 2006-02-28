@@ -5,7 +5,7 @@ Version:	4.2.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:        http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
+Source0:	http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
 # Source0-md5:	e3685ace007f065eadbd7acce6fa61e8
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
@@ -16,11 +16,11 @@ BuildRequires:	libtool
 BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
-BuildRequires:	xfce4-dev-tools
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
+BuildRequires:	xfce4-dev-tools
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libxfcegui4 >= %{version}
 Requires:	libxfce4mcs >= %{version}
+Requires:	libxfcegui4 >= %{version}
 Requires:	xfce-mcs-manager >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -91,7 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-	
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/splash/engines/*.{la,a}
 
