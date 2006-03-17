@@ -22,6 +22,7 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfce4mcs >= %{version}
 Requires:	libxfcegui4 >= %{version}
 Requires:	xfce-mcs-manager >= %{version}
+Requires:	xorg-app-iceauth
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -81,7 +82,7 @@ mv -f po/{pt_PT,pt}.po
 %{__automake}
 %{__autoconf}
 %configure \
-	ICEAUTH=/usr/X11R6/bin/iceauth
+	ICEAUTH=/usr/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
 %{__make} \
 	libxfsm_4_2_la_LIBADD="\$(LIBX11_LIBS) \$(LIBXFCEGUI4_LIBS)"
