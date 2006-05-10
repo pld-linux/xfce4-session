@@ -1,11 +1,12 @@
---- xfce4-session-4.2.3/configure.ac.orig	2005-11-05 18:08:59.000000000 +0100
-+++ xfce4-session-4.2.3/configure.ac	2005-11-10 04:34:25.000000000 +0100
-@@ -63,7 +63,7 @@
+diff -aurN xfce4-session-4.3.90.1orig/configure.in xfce4-session-4.3.90.1/configure.in
+--- xfce4-session-4.3.90.1orig/configure.in	2006-04-16 17:41:02.000000000 +0200
++++ xfce4-session-4.3.90.1/configure.in	2006-05-08 19:30:27.620233904 +0200
+@@ -67,7 +67,7 @@
  dnl Check for i18n support
- BM_I18N([xfce4-session], [af ar az be bn_IN ca cs da de el en_GB eo es es_MX
- 			  et eu fa fi fr gu he hi hu it ja ko ku lt mr ms nl
--			  nb_NO pa pl pt_BR pt_PT ro ru sk sl sv ta tr uk vi
-+			  nb pa pl pt_BR pt ro ru sk sl sv ta tr uk vi
- 			  zh_CN zh_TW])
+ XDT_I18N([ar az be bn_IN ca cs de el en_GB eo es es_MX et eu fa fi fr gu he \
+           hi it ja ko lt mr ms nl nb_NO pa pl pt_BR pt_PT ro ru sv \
+-          sk ta tr uk vi zh_CN zh_TW])
++          sk tr uk vi zh_CN zh_TW])
  
  dnl Check for required packages
+ XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.1])
