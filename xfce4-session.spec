@@ -1,12 +1,12 @@
 Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.2.3
+Version:	4.3.90.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	e3685ace007f065eadbd7acce6fa61e8
+Source0:	http://www.xfce.org/archive/xfce-%{version}/src/xfce4-session-%{version}.tar.bz2
+# Source0-md5:	f0ec9fcc3f6211e105f2f00c847ed1b1
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -116,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xfce4/splash/engines/*.so
 %dir %{_sysconfdir}/xdg/%{name}
 %{_sysconfdir}/xdg/%{name}/%{name}.rc
+%{_datadir}/xfce4/tips
 
 %{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
@@ -125,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %docdir %{_datadir}/xfce4/doc
 %{_datadir}/xfce4/doc/C/*
 %lang(fr) %{_datadir}/xfce4/doc/fr/*
-%lang(he) %{_datadir}/xfce4/doc/he/*
+#%lang(he) %{_datadir}/xfce4/doc/he/*
 
 %files libs
 %defattr(644,root,root,755)
