@@ -1,3 +1,6 @@
+# Conditional build:
+%bcond_without	static_libs	# don't build static library
+#
 Summary:	Xfce Session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
@@ -83,6 +86,7 @@ mv -f po/{pt_PT,pt}.po
 %{__automake}
 %{__autoconf}
 %configure \
+	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
 %{__make} \
@@ -140,6 +144,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/xfce4/xfce4-session-*
 %{_pkgconfigdir}/xfce4-session-*.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libxfsm-*.a
+%endif
