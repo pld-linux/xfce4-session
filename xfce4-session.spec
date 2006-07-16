@@ -1,23 +1,28 @@
-Summary:	Xfce Session manager
+#
+# Conditional build:
+%bcond_without	static_libs	# don't build static library
+#
+Summary:	Xfce session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.2.3
+Version:	4.3.90.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://hannelore.f1.fhtw-berlin.de/mirrors/xfce4/xfce-%{version}/src/%{name}-%{version}.tar.gz
-# Source0-md5:	e3685ace007f065eadbd7acce6fa61e8
+Source0:	http://www.xfce.org/archive/xfce-%{version}/src/xfce4-session-%{version}.tar.bz2
+# Source0-md5:	32aecd2896ae290a0cbb0f67d4bc8a3a
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
 BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
-BuildRequires:	xfce4-dev-tools
+BuildRequires:	xfce4-dev-tools >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfce4mcs >= %{version}
 Requires:	libxfcegui4 >= %{version}
@@ -77,11 +82,13 @@ mv -f po/{pt_PT,pt}.po
 
 %build
 %{__libtoolize}
-%{__aclocal} -I %{_datadir}/xfce4/dev-tools/m4macros
+%{__aclocal}
 %{__autoheader}
 %{__automake}
 %{__autoconf}
+LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
+	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
 %{__make} \
@@ -116,6 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xfce4/splash/engines/*.so
 %dir %{_sysconfdir}/xdg/%{name}
 %{_sysconfdir}/xdg/%{name}/%{name}.rc
+%{_datadir}/xfce4/tips
 
 %{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
@@ -125,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %docdir %{_datadir}/xfce4/doc
 %{_datadir}/xfce4/doc/C/*
 %lang(fr) %{_datadir}/xfce4/doc/fr/*
-%lang(he) %{_datadir}/xfce4/doc/he/*
+#%lang(he) %{_datadir}/xfce4/doc/he/*
 
 %files libs
 %defattr(644,root,root,755)
@@ -138,6 +146,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/xfce4/xfce4-session-*
 %{_pkgconfigdir}/xfce4-session-*.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libxfsm-*.a
+%endif
