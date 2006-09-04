@@ -5,12 +5,12 @@
 Summary:	Xfce session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.3.90.2
+Version:	4.3.99.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/xfce4-session-%{version}.tar.bz2
-# Source0-md5:	32aecd2896ae290a0cbb0f67d4bc8a3a
+# Source0-md5:	98c20381becc6fa84fae40be888b2ac7
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -21,9 +21,12 @@ BuildRequires:	libtool
 BuildRequires:	libxfce4mcs-devel >= %{version}
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
 BuildRequires:	xfce4-dev-tools >= %{version}
 Requires:	%{name}-libs = %{version}-%{release}
+Requires(post,postun):	gtk+2 >= 2:2.10.1
+Requires(post,postun):	hicolor-icon-cache
 Requires:	libxfce4mcs >= %{version}
 Requires:	libxfcegui4 >= %{version}
 Requires:	xfce-mcs-manager >= %{version}
@@ -86,7 +89,6 @@ mv -f po/{pt_PT,pt}.po
 %{__autoheader}
 %{__automake}
 %{__autoconf}
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
@@ -108,6 +110,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/splash/engines/*.{la,a}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+%update_icon_cache hicolor
+
+%postun
+%update_icon_cache hicolor
+
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
@@ -122,6 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/xfce4/splash/engines
 %attr(755,root,root) %{_libdir}/xfce4/splash/engines/*.so
 %dir %{_sysconfdir}/xdg/%{name}
+%{_sysconfdir}/xdg/autostart/*.desktop
 %{_sysconfdir}/xdg/%{name}/%{name}.rc
 %{_datadir}/xfce4/tips
 
