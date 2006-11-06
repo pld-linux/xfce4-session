@@ -5,12 +5,12 @@
 Summary:	Xfce session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.3.99.1
+Version:	4.3.99.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/xfce4-session-%{version}.tar.bz2
-# Source0-md5:	98c20381becc6fa84fae40be888b2ac7
+# Source0-md5:	c2a4a306de2538a4425349587dccb7d9
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -90,6 +90,7 @@ mv -f po/{pt_PT,pt}.po
 %{__automake}
 %{__autoconf}
 %configure \
+	--enable-dbus \
 	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
