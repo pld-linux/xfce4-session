@@ -29,6 +29,7 @@ Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	xfce-mcs-manager >= %{version}
 Requires:	xorg-app-iceauth
+Obsoletes:	xfce4-toys
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -88,6 +89,7 @@ mv -f po/{pt_PT,pt}.po
 %{__autoconf}
 %configure \
 	--enable-dbus \
+	--enable-session-screenshots \
 	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
