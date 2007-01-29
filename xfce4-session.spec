@@ -5,12 +5,12 @@
 Summary:	Xfce session manager
 Summary(pl):	Zarz±dca sesji Xfce
 Name:		xfce4-session
-Version:	4.3.99.2
+Version:	4.4.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://www.xfce.org/archive/xfce-%{version}/src/xfce4-session-%{version}.tar.bz2
-# Source0-md5:	c2a4a306de2538a4425349587dccb7d9
+Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	03132946280bae3107101e02fbad0ba8
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -24,13 +24,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
 BuildRequires:	xfce4-dev-tools >= %{version}
-Requires:	%{name}-libs = %{version}-%{release}
-Requires(post,postun):	gtk+2 >= 2:2.10.1
+Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
-Requires:	libxfce4mcs >= %{version}
-Requires:	libxfcegui4 >= %{version}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires:	xfce-mcs-manager >= %{version}
-Requires:	xorg-app-iceauth
+Obsoletes:	xfce4-toys
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,7 +41,6 @@ xfce4-session jest zarz±dc± sesji dla ¶rodowiska Xfce.
 Summary:	Xfce Session Manager library
 Summary(pl):	Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
 Group:		Libraries
-Requires:	libxfcegui4 >= %{version}
 
 %description libs
 Xfce Session Manager library.
@@ -91,8 +88,9 @@ mv -f po/{pt_PT,pt}.po
 %{__autoconf}
 %configure \
 	--enable-dbus \
+	--enable-session-screenshots \
 	%{!?with_static_libs:--disable-static} \
-	ICEAUTH=/usr/bin/iceauth
+	ICEAUTH=/usr/X11R6/bin/iceauth
 # why libxfsm_4_2_la_LIBADD on Cygwin only???
 %{__make} \
 	libxfsm_4_2_la_LIBADD="\$(LIBX11_LIBS) \$(LIBXFCEGUI4_LIBS)"
