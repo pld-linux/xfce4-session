@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Xfce session manager
-Summary(pl.UTF-8):   Zarządca sesji Xfce
+Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.4.0
 Release:	1
@@ -40,7 +40,7 @@ xfce4-session jest zarządcą sesji dla środowiska Xfce.
 
 %package libs
 Summary:	Xfce Session Manager library
-Summary(pl.UTF-8):   Biblioteka zarządcy sesji dla środowiska Xfce
+Summary(pl.UTF-8):	Biblioteka zarządcy sesji dla środowiska Xfce
 Group:		Libraries
 
 %description libs
@@ -51,7 +51,7 @@ Biblioteka zarządcy sesji dla środowiska Xfce.
 
 %package devel
 Summary:	Header files for Xfce Session Manager library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4-devel >= %{version}
@@ -64,7 +64,7 @@ Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce.
 
 %package static
 Summary:	Static Xfce Session Manager library
-Summary(pl.UTF-8):   Statyczna biblioteka zarządcy sesji dla środowiska Xfce
+Summary(pl.UTF-8):	Statyczna biblioteka zarządcy sesji dla środowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
