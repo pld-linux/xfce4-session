@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Xfce session manager
-Summary(pl):	Zarz±dca sesji Xfce
+Summary(pl.UTF-8):   ZarzÄ…dca sesji Xfce
 Name:		xfce4-session
 Version:	4.3.90.2
 Release:	1
@@ -33,24 +33,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 xfce4-session is the session manager for the Xfce desktop environment.
 
-%description -l pl
-xfce4-session jest zarz±dc± sesji dla ¶rodowiska Xfce.
+%description -l pl.UTF-8
+xfce4-session jest zarzÄ…dcÄ… sesji dla Å›rodowiska Xfce.
 
 %package libs
 Summary:	Xfce Session Manager library
-Summary(pl):	Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
+Summary(pl.UTF-8):   Biblioteka zarzÄ…dcy sesji dla Å›rodowiska Xfce
 Group:		Libraries
 Requires:	libxfcegui4 >= %{version}
 
 %description libs
 Xfce Session Manager library.
 
-%description libs -l pl
-Biblioteka zarz±dcy sesji dla ¶rodowiska Xfce.
+%description libs -l pl.UTF-8
+Biblioteka zarzÄ…dcy sesji dla Å›rodowiska Xfce.
 
 %package devel
 Summary:	Header files for Xfce Session Manager library
-Summary(pl):	Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska Xfce
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki zarzÄ…dcy sesji dla Å›rodowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4-devel >= %{version}
@@ -58,20 +58,20 @@ Requires:	libxfcegui4-devel >= %{version}
 %description devel
 Header files for Xfce Session Manager library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki zarz±dcy sesji dla ¶rodowiska Xfce.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki zarzÄ…dcy sesji dla Å›rodowiska Xfce.
 
 %package static
 Summary:	Static Xfce Session Manager library
-Summary(pl):	Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska Xfce
+Summary(pl.UTF-8):   Statyczna biblioteka zarzÄ…dcy sesji dla Å›rodowiska Xfce
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static Xfce Session Manager library.
 
-%description static -l pl
-Statyczna biblioteka zarz±dcy sesji dla ¶rodowiska Xfce.
+%description static -l pl.UTF-8
+Statyczna biblioteka zarzÄ…dcy sesji dla Å›rodowiska Xfce.
 
 %prep
 %setup -q
