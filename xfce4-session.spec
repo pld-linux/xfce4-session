@@ -5,12 +5,12 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.4.0
+Version:	4.4.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	03132946280bae3107101e02fbad0ba8
+# Source0-md5:	82c31aef2856e30ebc09d2911e9b96ee
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
@@ -23,7 +23,7 @@ BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	xfce-mcs-manager-devel >= %{version}
-BuildRequires:	xfce4-dev-tools >= %{version}
+BuildRequires:	xfce4-dev-tools >= 4.4.0
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
