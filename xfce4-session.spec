@@ -6,12 +6,16 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.4.3
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	5c522e0d28c952af413cf0c43257b907
+Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
+# Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Patch0:		%{name}-locale-names.patch
+Patch1:		%{name}-logout_dialog.patch
+Patch2:		%{name}-ubuntu_icons.patch
 URL:		http://www.xfce.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -75,8 +79,10 @@ Static Xfce Session Manager library.
 Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 
 %prep
-%setup -q
+%setup -q -a1
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 mv -f po/{nb_NO,nb}.po
 mv -f po/{pt_PT,pt}.po
