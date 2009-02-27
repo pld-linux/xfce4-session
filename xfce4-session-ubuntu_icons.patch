@@ -1,23 +1,16 @@
---- ./icons/48x48/Makefile.am.org	2008-10-26 23:08:07.000000000 +0100
-+++ ./icons/48x48/Makefile.am	2008-10-29 22:56:05.929007644 +0100
-@@ -1,10 +1,14 @@
- iconsdir = $(datadir)/icons/hicolor/48x48/apps
- icons_DATA = 								\
--	xfce4-autostart-editor.png					\
--	xfce4-session.png						\
--	xfce4-splash.png						\
--	xfsm-logout.png						\
--	xfsm-reboot.png						\
--	xfsm-shutdown.png
-+	xfce4-autostart-editor.png	\
-+	xfce4-session.png		\
-+	xfce4-splash.png		\
-+	xfsm-hibernate.png		\
-+	xfsm-lockscreen.png		\
-+	xfsm-logout.png			\
-+	xfsm-reboot.png			\
-+	xfsm-shutdown.png		\
-+	xfsm-suspend.png		\
+diff -urN xfce4-session-4.6.0/icons/48x48/Makefile.am xfce4-session-4.6.0.new/icons/48x48/Makefile.am
+--- xfce4-session-4.6.0/icons/48x48/Makefile.am	2009-01-12 22:11:40.000000000 +0100
++++ xfce4-session-4.6.0.new/icons/48x48/Makefile.am	2009-02-27 23:45:12.000000000 +0100
+@@ -4,9 +4,11 @@
+ 	xfce4-session.png						\
+ 	xfce4-splash.png						\
+ 	xfsm-hibernate.png						\
++	xfsm-lockscreen.png						\
+ 	xfsm-logout.png							\
+ 	xfsm-reboot.png							\
+ 	xfsm-shutdown.png						\
+-	xfsm-suspend.png
++	xfsm-suspend.png						\
 +	xfsm-switch.png
  
  EXTRA_DIST = $(icons_DATA)
