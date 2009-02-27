@@ -5,33 +5,34 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.4.3
-Release:	3
+Version:	4.6.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	5c522e0d28c952af413cf0c43257b907
-Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
+# Source0-md5:	79a08c3696196ef31fc8185658316706
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
-Patch0:		%{name}-locale-names.patch
-Patch1:		%{name}-logout_dialog.patch
-Patch2:		%{name}-ubuntu_icons.patch
-URL:		http://www.xfce.org/
+Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
+Patch0:		%{name}-ubuntu_icons.patch
+URL:		http://www.xfce.org/projects/xfce4-session/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	dbus-devel >= 1.0.0
+BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
 BuildRequires:	intltool >= 0.35.0
+BuildRequires:	libglade2-devel
 BuildRequires:	libtool
-BuildRequires:	libxfce4mcs-devel >= %{version}
+BuildRequires:	libwnck-devel >= 2.12.0
 BuildRequires:	libxfcegui4-devel >= %{version}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	xfce-mcs-manager-devel >= %{version}
-BuildRequires:	xfce4-dev-tools >= 4.4.0.1
+BuildRequires:	xfce4-dev-tools >= 4.6.0
+BuildRequires:	xfconf-devel >= %{version}
+BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	xfce-mcs-manager >= %{version}
 Requires:	xorg-app-iceauth
 Obsoletes:	xfce4-toys
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,7 +46,7 @@ xfce4-session jest zarządcą sesji dla środowiska Xfce.
 %package libs
 Summary:	Xfce Session Manager library
 Summary(pl.UTF-8):	Biblioteka zarządcy sesji dla środowiska Xfce
-Group:		Libraries
+Group:		X11/Libraries
 
 %description libs
 Xfce Session Manager library.
@@ -56,9 +57,10 @@ Biblioteka zarządcy sesji dla środowiska Xfce.
 %package devel
 Summary:	Header files for Xfce Session Manager library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfcegui4-devel >= %{version}
+Requires:	xfconf-devel >= %{version}
 
 %description devel
 Header files for Xfce Session Manager library.
@@ -69,7 +71,7 @@ Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce.
 %package static
 Summary:	Static Xfce Session Manager library
 Summary(pl.UTF-8):	Statyczna biblioteka zarządcy sesji dla środowiska Xfce
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
@@ -81,11 +83,6 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %prep
 %setup -q -a1
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-
-mv -f po/{nb_NO,nb}.po
-mv -f po/{pt_PT,pt}.po
 
 %build
 %{__intltoolize}
@@ -99,9 +96,8 @@ mv -f po/{pt_PT,pt}.po
 	--enable-session-screenshots \
 	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
-# why libxfsm_4_2_la_LIBADD on Cygwin only???
-%{__make} \
-	libxfsm_4_2_la_LIBADD="\$(LIBX11_LIBS) \$(LIBXFCEGUI4_LIBS)"
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -109,7 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/mcs-plugins/*.{la,a}
+mv $RPM_BUILD_ROOT%{_datadir}/locale/nb{_NO,}
+mv $RPM_BUILD_ROOT%{_datadir}/locale/pt{_PT,}
+
 rm -f $RPM_BUILD_ROOT%{_libdir}/xfce4/splash/engines/*.{la,a}
 
 %find_lang %{name}
@@ -129,16 +127,18 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/balou-*-theme
+%attr(755,root,root) %{_bindir}/xfce4-session
+%attr(755,root,root) %{_bindir}/xfce4-session-logout
+%attr(755,root,root) %{_bindir}/xfce4-session-settings
+%attr(755,root,root) %{_bindir}/xfce4-tips
+%attr(755,root,root) %{_libdir}/balou-export-theme
+%attr(755,root,root) %{_libdir}/balou-install-theme
 %attr(755,root,root) %{_libdir}/xfsm-shutdown-helper
-%attr(755,root,root) %{_libdir}/xfce4/mcs-plugins/*.so
 %dir %{_libdir}/xfce4/splash
 %dir %{_libdir}/xfce4/splash/engines
 %attr(755,root,root) %{_libdir}/xfce4/splash/engines/*.so
-%dir %{_sysconfdir}/xdg/%{name}
 %{_sysconfdir}/xdg/autostart/*.desktop
-%{_sysconfdir}/xdg/%{name}/%{name}.rc
+%{_sysconfdir}/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
 %{_datadir}/xfce4/tips
 
 %{_datadir}/themes/Default/balou
@@ -149,21 +149,21 @@ rm -rf $RPM_BUILD_ROOT
 %docdir %{_datadir}/xfce4/doc
 %{_datadir}/xfce4/doc/C/*
 %lang(fr) %{_datadir}/xfce4/doc/fr/*
-#%lang(he) %{_datadir}/xfce4/doc/he/*
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxfsm-*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libxfsm-4.6.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libxfsm-4.6.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxfsm-*.so
-%{_libdir}/libxfsm-*.la
-%{_includedir}/xfce4/xfce4-session-*
-%{_pkgconfigdir}/xfce4-session-*.pc
+%attr(755,root,root) %{_libdir}/libxfsm-4.6.so
+%{_libdir}/libxfsm-4.6.la
+%{_includedir}/xfce4/xfce4-session-4.6
+%{_pkgconfigdir}/xfce4-session-2.0.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libxfsm-*.a
+%{_libdir}/libxfsm-4.6.a
 %endif
