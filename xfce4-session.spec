@@ -11,8 +11,8 @@ License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	79a08c3696196ef31fc8185658316706
-# Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
+# Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Patch0:		%{name}-ubuntu_icons.patch
 URL:		http://www.xfce.org/projects/xfce4-session/
 BuildRequires:	autoconf >= 2.50
