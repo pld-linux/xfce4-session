@@ -6,7 +6,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.6.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://www.xfce.org/archive/xfce-%{version}/src/%{name}-%{version}.tar.bz2
@@ -33,6 +33,7 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	xfce4-dirs >= 4.6
 Requires:	xorg-app-iceauth
 Obsoletes:	xfce4-toys
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -142,9 +143,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/*/*
 %{_mandir}/man1/*.1*
 
-%docdir %{_datadir}/xfce4/doc
-%{_datadir}/xfce4/doc/C/*
-%lang(fr) %{_datadir}/xfce4/doc/fr/*
+%{_datadir}/xfce4/doc/C/*.html
+%{_datadir}/xfce4/doc/C/images/*.png
+%lang(fr) %{_datadir}/xfce4/doc/fr/*.html
+%lang(fr) %{_datadir}/xfce4/doc/fr/images/*.png
 
 %files libs
 %defattr(644,root,root,755)
