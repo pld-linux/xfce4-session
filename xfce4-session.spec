@@ -97,6 +97,7 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %{__automake}
 %{__autoconf}
 %configure \
+	--disable-hal \
 	--enable-session-screenshots \
 	%{!?with_static_libs:--disable-static} \
 	ICEAUTH=/usr/bin/iceauth
