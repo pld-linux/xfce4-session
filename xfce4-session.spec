@@ -129,7 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog ChangeLog.pre-xfce-devel NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/xfce4-session
 %attr(755,root,root) %{_bindir}/xfce4-session-logout
 %attr(755,root,root) %{_bindir}/xfce4-session-settings
