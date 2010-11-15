@@ -16,6 +16,7 @@ Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 Patch0:		%{name}-ubuntu_icons.patch
 Patch1:		%{name}-splash-path.patch
 URL:		http://www.xfce.org/projects/xfce4-session/
+BuildRequires:	UPower-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -36,6 +37,7 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	UPower
 Requires:	xfce4-dirs >= 4.6
 Requires:	xorg-app-iceauth
 Obsoletes:	xfce4-toys
