@@ -5,39 +5,37 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.7.1
-Release:	0.2
+Version:	4.8.0
+Release:	0.9
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://www.xfce.org/archive/xfce/4.8pre1/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	e9858ae2000fafee297e8d7336fca9bd
+Source0:	http://archive.xfce.org/xfce/4.8/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	7540bd6751242117208409ad8b736668
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Patch0:		%{name}-ubuntu_icons.patch
-Patch1:		%{name}-splash-path.patch
-URL:		http://www.xfce.org/projects/xfce4-session/
-BuildRequires:	UPower-devel
+URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
+BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.35.0
-BuildRequires:	libglade2-devel
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.12.0
-#BuildRequires:	libxfce4ui-devel >= %{version}
-BuildRequires:	libxfce4ui-devel >= 4.7.0
+BuildRequires:	libwnck-devel >= 2.22.0
+BuildRequires:	libxfce4ui-devel >= %{version}
+BuildRequires:	libxfce4util-devel >= %{version}
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	xfce4-dev-tools >= 4.7.0
-#BuildRequires:	xfconf-devel >= %{version}
-BuildRequires:	xfconf-devel >= 4.7.0
+BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	upower-devel
+BuildRequires:	xfce4-dev-tools >= 4.8.0
+BuildRequires:	xfce4-panel-devel >= %{version}
+BuildRequires:	xfconf-devel >= %{version}
 BuildRequires:	xorg-lib-libSM-devel
-Requires(post,postun):	gtk+2
-Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	UPower
+Requires:	hicolor-icon-theme
+Requires:	upower
 Requires:	xfce4-dirs >= 4.6
 Requires:	xorg-app-iceauth
 Obsoletes:	xfce4-toys
@@ -65,10 +63,8 @@ Summary:	Header files for Xfce Session Manager library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-#Requires:	libxfce4ui-devel >= %{version}
-#Requires:	xfconf-devel >= %{version}
-Requires:	libxfce4ui-devel >= 4.7.0
-Requires:	xfconf-devel >= 4.7.0
+Requires:	libxfce4ui-devel >= %{version}
+Requires:	xfconf-devel >= %{version}
 
 %description devel
 Header files for Xfce Session Manager library.
@@ -91,7 +87,6 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %prep
 %setup -q -a1
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -104,6 +99,7 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 	--disable-hal \
 	--enable-session-screenshots \
 	%{!?with_static_libs:--disable-static} \
+	--disable-silent-rules \
 	ICEAUTH=/usr/bin/iceauth
 
 %{__make}
@@ -116,6 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 
 rm $RPM_BUILD_ROOT%{_libdir}/xfce4/panel/plugins/*.{la,a}
 rm $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.{la,a}
+
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
 
 %find_lang %{name}
 
@@ -155,10 +153,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/*/*
 %{_mandir}/man1/*.1*
 
-#%{_datadir}/xfce4/doc/C/*.html
-#%{_datadir}/xfce4/doc/C/images/*.png
-#%lang(fr) %{_datadir}/xfce4/doc/fr/*.html
-#%lang(fr) %{_datadir}/xfce4/doc/fr/images/*.png
+%dir %{_datadir}/doc/xfce4-session
+%dir %{_datadir}/doc/xfce4-session/html
+%{_datadir}/doc/xfce4-session/html/C
+%lang(da) %{_datadir}/doc/xfce4-session/html/da
+%lang(el) %{_datadir}/doc/xfce4-session/html/el
+%lang(gl) %{_datadir}/doc/xfce4-session/html/gl
+%lang(it) %{_datadir}/doc/xfce4-session/html/it
+%lang(ja) %{_datadir}/doc/xfce4-session/html/ja
+%lang(ru) %{_datadir}/doc/xfce4-session/html/ru
+%lang(sv) %{_datadir}/doc/xfce4-session/html/sv
+%lang(ug) %{_datadir}/doc/xfce4-session/html/ug
+%{_datadir}/doc/xfce4-session/html/xfce4-session.css
 
 %files libs
 %defattr(644,root,root,755)
