@@ -6,7 +6,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.8.0
-Release:	0.9
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/xfce/4.8/src/%{name}-%{version}.tar.bz2
@@ -34,6 +34,7 @@ BuildRequires:	xfce4-panel-devel >= %{version}
 BuildRequires:	xfconf-devel >= %{version}
 BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	upower
 Requires:	xfce4-dirs >= 4.6
@@ -110,8 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT%{_libdir}/xfce4/panel/plugins/*.{la,a}
-rm $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/panel/plugins/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
 
@@ -174,7 +176,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libxfsm-4.6.so
-%{_libdir}/libxfsm-4.6.la
 %{_includedir}/xfce4/xfce4-session-4.6
 %{_pkgconfigdir}/xfce4-session-2.0.pc
 
