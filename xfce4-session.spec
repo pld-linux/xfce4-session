@@ -111,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
