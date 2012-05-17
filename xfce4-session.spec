@@ -5,12 +5,12 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.8.0
+Version:	4.10.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/xfce/4.8/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	7540bd6751242117208409ad8b736668
+Source0:	http://archive.xfce.org/xfce/4.10/src/%{name}-%{version}.tar.bz2
+# Source0-md5:	4768e1a41a0287af6aad18b329a0f230
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Patch0:		%{name}-ubuntu_icons.patch
@@ -29,7 +29,7 @@ BuildRequires:	libxfce4util-devel >= %{version}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	upower-devel
-BuildRequires:	xfce4-dev-tools >= 4.8.0
+BuildRequires:	xfce4-dev-tools >= 4.10.0
 BuildRequires:	xfce4-panel-devel >= %{version}
 BuildRequires:	xfconf-devel >= %{version}
 BuildRequires:	xorg-lib-libSM-devel
