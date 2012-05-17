@@ -133,6 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO
+%attr(755,root,root) %{_bindir}/startxfce4
+%attr(755,root,root) %{_bindir}/xflock4
 %attr(755,root,root) %{_bindir}/xfce4-session
 %attr(755,root,root) %{_bindir}/xfce4-session-logout
 %attr(755,root,root) %{_bindir}/xfce4-session-settings
@@ -144,7 +146,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xfce4/session/splash-engines/*.so
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_sysconfdir}/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
+%{_sysconfdir}/xdg/xfce4/Xft.xrdb
+%{_sysconfdir}/xdg/xfce4/xinitrc
 
+%{_datadir}/xsessions/xfce.desktop
 %{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*
