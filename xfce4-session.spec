@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	static_libs	# don't build static library
+%bcond_with	static_libs	# don't build static library
 #
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
@@ -136,36 +136,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xfce4-session
 %attr(755,root,root) %{_bindir}/xfce4-session-logout
 %attr(755,root,root) %{_bindir}/xfce4-session-settings
-%attr(755,root,root) %{_bindir}/xfce4-tips
 %dir %{_libdir}/xfce4/session
 %attr(755,root,root) %{_libdir}/xfce4/session/balou-export-theme
 %attr(755,root,root) %{_libdir}/xfce4/session/balou-install-theme
 %attr(755,root,root) %{_libdir}/xfce4/session/xfsm-shutdown-helper
 %dir %{_libdir}/xfce4/session/splash-engines
 %attr(755,root,root) %{_libdir}/xfce4/session/splash-engines/*.so
-%attr(755,root,root) %{_libdir}/xfce4/panel/plugins/*.so
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_sysconfdir}/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
-%{_datadir}/xfce4/tips
-%{_datadir}/xfce4/panel-plugins/xfsm-logout-plugin.desktop
 
 %{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*
 %{_mandir}/man1/*.1*
-
-%dir %{_datadir}/doc/xfce4-session
-%dir %{_datadir}/doc/xfce4-session/html
-%{_datadir}/doc/xfce4-session/html/C
-%lang(da) %{_datadir}/doc/xfce4-session/html/da
-%lang(el) %{_datadir}/doc/xfce4-session/html/el
-%lang(gl) %{_datadir}/doc/xfce4-session/html/gl
-%lang(it) %{_datadir}/doc/xfce4-session/html/it
-%lang(ja) %{_datadir}/doc/xfce4-session/html/ja
-%lang(ru) %{_datadir}/doc/xfce4-session/html/ru
-%lang(sv) %{_datadir}/doc/xfce4-session/html/sv
-%lang(ug) %{_datadir}/doc/xfce4-session/html/ug
-%{_datadir}/doc/xfce4-session/html/xfce4-session.css
 
 %files libs
 %defattr(644,root,root,755)
