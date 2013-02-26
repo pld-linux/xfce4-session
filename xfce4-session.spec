@@ -23,7 +23,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.22.0
+BuildRequires:	libwnck2-devel >= 2.22.0
 BuildRequires:	libxfce4ui-devel >= %{version}
 BuildRequires:	libxfce4util-devel >= %{version}
 BuildRequires:	pkgconfig
