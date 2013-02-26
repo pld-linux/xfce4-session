@@ -28,9 +28,7 @@ BuildRequires:	libxfce4ui-devel >= %{version}
 BuildRequires:	libxfce4util-devel >= %{version}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.601
-BuildRequires:	upower-devel
 BuildRequires:	xfce4-dev-tools >= 4.10.0
-BuildRequires:	xfce4-panel-devel >= %{version}
 BuildRequires:	xfconf-devel >= %{version}
 BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
