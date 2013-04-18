@@ -1,4 +1,3 @@
-# TODO: fix systemd patch adding runtime detection and enable systemd support
 #
 # Conditional build:
 %bcond_with	static_libs	# don't build static library
@@ -7,7 +6,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.10.0
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/xfce/4.10/src/%{name}-%{version}.tar.bz2
@@ -92,7 +91,7 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %setup -q -a1
 %patch0 -p1
 %patch1 -p1
-#patch2 -p1
+%patch2 -p1
 %patch3 -p1
 
 %build
@@ -103,7 +102,7 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %{__automake}
 %{__autoconf}
 %configure \
-	--disable-systemd \
+	--enable-systemd \
 	%{!?with_static_libs:--disable-static} \
 	--disable-silent-rules \
 	ICEAUTH=/usr/bin/iceauth

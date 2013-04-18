@@ -11,7 +11,7 @@ diff -up xfce4-session-4.10.0/configure.in.systemd xfce4-session-4.10.0/configur
 +              [with_systemd=$enableval],
 +              [with_systemd=auto])
 +PKG_CHECK_MODULES(SYSTEMD,
-+                  [libsystemd-login polkit-gobject-1],
++                  [libsystemd-daemon libsystemd-login polkit-gobject-1],
 +                  [have_systemd=yes], [have_systemd=no])
 +AC_MSG_CHECKING([whether to use systemd])
 +if test x$with_systemd = xauto ; then
@@ -38,16 +38,7 @@ diff -up xfce4-session-4.10.0/configure.in.systemd xfce4-session-4.10.0/configur
 diff -up xfce4-session-4.10.0/xfce4-session/Makefile.am.systemd xfce4-session-4.10.0/xfce4-session/Makefile.am
 --- xfce4-session-4.10.0/xfce4-session/Makefile.am.systemd	2012-04-28 15:43:27.000000000 -0500
 +++ xfce4-session-4.10.0/xfce4-session/Makefile.am	2013-03-29 14:29:28.468230742 -0500
-@@ -38,8 +38,6 @@ xfce4_session_SOURCES =							\
- 	xfsm-compat-gnome.h						\
- 	xfsm-compat-kde.c						\
- 	xfsm-compat-kde.h						\
--	xfsm-consolekit.c						\
--	xfsm-consolekit.h						\
- 	xfsm-dns.c							\
- 	xfsm-dns.h							\
- 	xfsm-error.c							\
-@@ -65,6 +63,16 @@ xfce4_session_SOURCES =							\
+@@ -65,6 +63,12 @@ xfce4_session_SOURCES =							\
  	xfsm-upower.c							\
  	xfsm-upower.h
  
@@ -55,10 +46,6 @@ diff -up xfce4-session-4.10.0/xfce4-session/Makefile.am.systemd xfce4-session-4.
 +xfce4_session_SOURCES +=						\
 +	xfsm-systemd.c							\
 +	xfsm-systemd.h
-+else
-+xfce4_session_SOURCES +=						\
-+	xfsm-consolekit.c						\
-+	xfsm-consolekit.h
 +endif
 +
  xfce4_session_CFLAGS =							\
@@ -83,134 +70,127 @@ diff -up xfce4-session-4.10.0/xfce4-session/Makefile.am.systemd xfce4-session-4.
 diff -up xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c.systemd xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c
 --- xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c.systemd	2012-04-28 15:43:27.000000000 -0500
 +++ xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c	2013-03-29 14:34:40.377331342 -0500
-@@ -66,10 +66,13 @@
- #include <xfce4-session/xfsm-fadeout.h>
- #include <xfce4-session/xfsm-global.h>
- #include <xfce4-session/xfsm-legacy.h>
--#include <xfce4-session/xfsm-consolekit.h>
+@@ -66,7 +66,10 @@
+ #include <xfce4-session/xfsm-consolekit.h>
  #include <xfce4-session/xfsm-upower.h>
  
 -
 +#ifdef HAVE_SYSTEMD
++#include <systemd/sd-daemon.h>
 +#include <xfce4-session/xfsm-systemd.h>
-+#else
-+#include <xfce4-session/xfsm-consolekit.h>
 +#endif
  
  static void xfsm_shutdown_finalize  (GObject      *object);
  static void xfsm_shutdown_sudo_free (XfsmShutdown *shutdown);
-@@ -93,7 +96,11 @@ struct _XfsmShutdown
- {
+@@ -93,6 +96,9 @@ struct _XfsmShutdown
    GObject __parent__;
  
--  XfsmConsolekit *consolekit;
+   XfsmConsolekit *consolekit;
 +#ifdef HAVE_SYSTEMD
 +  SystemdProxy   *systemd_proxy;
-+#else
-+   XfsmConsolekit *consolekit;
 +#endif
    XfsmUPower     *upower;
  
    /* kiosk settings */
-@@ -130,8 +137,11 @@ static void
- xfsm_shutdown_init (XfsmShutdown *shutdown)
+@@ -130,6 +137,12 @@ xfsm_shutdown_init (XfsmShutdown *shutdown)
  {
    XfceKiosk *kiosk;
--
+ 
 +#ifdef HAVE_SYSTEMD
-+  shutdown->systemd_proxy = systemd_proxy_new ();
-+#else
-   shutdown->consolekit = xfsm_consolekit_get ();
++  shutdown->systemd_proxy = NULL;
++  if (sd_booted() > 0)
++    shutdown->systemd_proxy = systemd_proxy_new ();
++  else
 +#endif
+   shutdown->consolekit = xfsm_consolekit_get ();
    shutdown->upower = xfsm_upower_get ();
    shutdown->helper_state = SUDO_NOT_INITIAZED;
-   shutdown->helper_require_password = FALSE;
-@@ -150,7 +160,11 @@ xfsm_shutdown_finalize (GObject *object)
+@@ -150,6 +160,11 @@ xfsm_shutdown_finalize (GObject *object)
  {
    XfsmShutdown *shutdown = XFSM_SHUTDOWN (object);
  
 +#ifdef HAVE_SYSTEMD
-+  systemd_proxy_free (shutdown->systemd_proxy);
-+#else
-   g_object_unref (G_OBJECT (shutdown->consolekit));
++  if (shutdown->systemd_proxy)
++    systemd_proxy_free (shutdown->systemd_proxy);
++  else
 +#endif
+   g_object_unref (G_OBJECT (shutdown->consolekit));
    g_object_unref (G_OBJECT (shutdown->upower));
  
-   /* close down helper */
-@@ -641,7 +655,11 @@ xfsm_shutdown_try_restart (XfsmShutdown
+@@ -641,6 +655,11 @@ xfsm_shutdown_try_restart (XfsmShutdown
    if (shutdown->helper_state == SUDO_AVAILABLE)
      return xfsm_shutdown_sudo_try_action (shutdown, XFSM_SHUTDOWN_RESTART, error);
    else
 +#ifdef HAVE_SYSTEMD
-+    return systemd_proxy_restart (shutdown->systemd_proxy, error);
-+#else
-     return xfsm_consolekit_try_restart (shutdown->consolekit, error);
++    if (shutdown->systemd_proxy)
++      return systemd_proxy_restart (shutdown->systemd_proxy, error);
++    else
 +#endif
+     return xfsm_consolekit_try_restart (shutdown->consolekit, error);
  }
  
- 
-@@ -658,7 +676,11 @@ xfsm_shutdown_try_shutdown (XfsmShutdown
+@@ -658,6 +676,11 @@ xfsm_shutdown_try_shutdown (XfsmShutdown
    if (shutdown->helper_state == SUDO_AVAILABLE)
      return xfsm_shutdown_sudo_try_action (shutdown, XFSM_SHUTDOWN_SHUTDOWN, error);
    else
 +#ifdef HAVE_SYSTEMD
-+    return systemd_proxy_shutdown (shutdown->systemd_proxy, error);
-+#else
++    if (shutdown->systemd_proxy)
++      return systemd_proxy_shutdown (shutdown->systemd_proxy, error);
++    else
++#endif
      return xfsm_consolekit_try_shutdown (shutdown->consolekit, error);
-+#endif
  }
  
- 
-@@ -669,7 +691,11 @@ xfsm_shutdown_try_suspend (XfsmShutdown
+@@ -669,6 +691,11 @@ xfsm_shutdown_try_suspend (XfsmShutdown
  {
    g_return_val_if_fail (XFSM_IS_SHUTDOWN (shutdown), FALSE);
  
 +#ifdef HAVE_SYSTEMD
-+  return systemd_proxy_suspend (shutdown->systemd_proxy, error);
-+#else
++  if (shutdown->systemd_proxy)
++    return systemd_proxy_suspend (shutdown->systemd_proxy, error);
++  else
++#endif
    return xfsm_upower_try_suspend (shutdown->upower, error);
-+#endif
  }
  
- 
-@@ -680,7 +706,11 @@ xfsm_shutdown_try_hibernate (XfsmShutdow
+@@ -680,6 +706,11 @@ xfsm_shutdown_try_hibernate (XfsmShutdow
  {
    g_return_val_if_fail (XFSM_IS_SHUTDOWN (shutdown), FALSE);
  
 +#ifdef HAVE_SYSTEMD
-+  return systemd_proxy_hibernate (shutdown->systemd_proxy, error);
-+#else
-   return xfsm_upower_try_hibernate (shutdown->upower, error);
++  if (shutdown->systemd_proxy)
++    return systemd_proxy_hibernate (shutdown->systemd_proxy, error);
++  else
 +#endif
+   return xfsm_upower_try_hibernate (shutdown->upower, error);
  }
  
- 
-@@ -697,8 +727,11 @@ xfsm_shutdown_can_restart (XfsmShutdown
-       *can_restart = FALSE;
+@@ -697,6 +727,12 @@ xfsm_shutdown_can_restart (XfsmShutdown
        return TRUE;
      }
--
+ 
 +#ifdef HAVE_SYSTEMD
-+  if (systemd_proxy_can_restart (shutdown->systemd_proxy, can_restart, error))
-+#else
++  if (shutdown->systemd_proxy)
++    if (systemd_proxy_can_restart (shutdown->systemd_proxy, can_restart, error))
++      return TRUE;
++  else
++#endif
    if (xfsm_consolekit_can_restart (shutdown->consolekit, can_restart, error))
-+#endif
      return TRUE;
  
-   if (xfsm_shutdown_sudo_init (shutdown, error))
-@@ -724,8 +757,11 @@ xfsm_shutdown_can_shutdown (XfsmShutdown
-       *can_shutdown = FALSE;
+@@ -724,6 +757,12 @@ xfsm_shutdown_can_shutdown (XfsmShutdown
        return TRUE;
      }
--
+ 
 +#ifdef HAVE_SYSTEMD
-+  if (systemd_proxy_can_shutdown (shutdown->systemd_proxy, can_shutdown, error))
-+#else
-   if (xfsm_consolekit_can_shutdown (shutdown->consolekit, can_shutdown, error))
++  if (shutdown->systemd_proxy)
++    if (systemd_proxy_can_shutdown (shutdown->systemd_proxy, can_shutdown, error))
++      return TRUE;
++  else
 +#endif
+   if (xfsm_consolekit_can_shutdown (shutdown->consolekit, can_shutdown, error))
      return TRUE;
  
-   if (xfsm_shutdown_sudo_init (shutdown, error))
 diff -up xfce4-session-4.10.0/xfce4-session/xfsm-systemd.c.systemd xfce4-session-4.10.0/xfce4-session/xfsm-systemd.c
 --- xfce4-session-4.10.0/xfce4-session/xfsm-systemd.c.systemd	2013-03-29 14:29:28.469230730 -0500
 +++ xfce4-session-4.10.0/xfce4-session/xfsm-systemd.c	2013-03-29 14:39:52.551428628 -0500
