@@ -1,0 +1,11 @@
+--- xfce4-session-4.10.0/configure.in~	2013-04-18 22:17:37.012003694 +0200
++++ xfce4-session-4.10.0/configure.in	2013-04-18 22:18:04.065592886 +0200
+@@ -33,7 +33,7 @@
+ 
+ dnl Initialize automake
+ AM_INIT_AUTOMAKE([AC_PACKAGE_TARNAME()], [AC_PACKAGE_VERSION()])
+-AM_CONFIG_HEADER([config.h])
++AC_CONFIG_HEADERS([config.h])
+ AM_MAINTAINER_MODE()
+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ 
