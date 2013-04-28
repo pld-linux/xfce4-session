@@ -6,7 +6,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.10.0
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/xfce/4.10/src/%{name}-%{version}.tar.bz2
@@ -17,6 +17,8 @@ Patch0:		%{name}-ubuntu_icons.patch
 Patch1:		%{name}-session-save.patch
 Patch2:		%{name}-add-systemd-support.patch
 Patch3:		am.patch
+Patch4:		0001-Use-the-async-spawn-function-of-glib.patch
+Patch5:		0002-Store-the-watch-function-id-to-avoid-possible-double.patch
 URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -30,7 +32,9 @@ BuildRequires:	libwnck2-devel >= 2.22.0
 BuildRequires:	libxfce4ui-devel >= %{version}
 BuildRequires:	libxfce4util-devel >= %{version}
 BuildRequires:	pkgconfig
+BuildRequires:	polkit-devel
 BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	systemd-devel
 BuildRequires:	xfce4-dev-tools >= 4.10.0
 BuildRequires:	xfconf-devel >= %{version}
 BuildRequires:	xorg-lib-libSM-devel
@@ -93,6 +97,8 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 %{__intltoolize}
