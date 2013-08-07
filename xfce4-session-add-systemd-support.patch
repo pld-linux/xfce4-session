@@ -170,10 +170,10 @@ diff -up xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c.systemd xfce4-sessio
      }
  
 +#ifdef HAVE_SYSTEMD
-+  if (shutdown->systemd_proxy)
++  if (shutdown->systemd_proxy) {
 +    if (systemd_proxy_can_restart (shutdown->systemd_proxy, can_restart, error))
 +      return TRUE;
-+  else
++  } else
 +#endif
    if (xfsm_consolekit_can_restart (shutdown->consolekit, can_restart, error))
      return TRUE;
@@ -183,10 +183,10 @@ diff -up xfce4-session-4.10.0/xfce4-session/xfsm-shutdown.c.systemd xfce4-sessio
      }
  
 +#ifdef HAVE_SYSTEMD
-+  if (shutdown->systemd_proxy)
++  if (shutdown->systemd_proxy) {
 +    if (systemd_proxy_can_shutdown (shutdown->systemd_proxy, can_shutdown, error))
 +      return TRUE;
-+  else
++  } else
 +#endif
    if (xfsm_consolekit_can_shutdown (shutdown->consolekit, can_shutdown, error))
      return TRUE;
