@@ -6,13 +6,16 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.10.0
-Release:	6
+Release:	7
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/xfce/4.10/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	4768e1a41a0287af6aad18b329a0f230
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
+# taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
+# http://lists.fedoraproject.org/pipermail/devel-announce/2011-February/000758.html
+Source2:        polkit-mate-authentication-agent-1.desktop
 Patch0:		%{name}-ubuntu_icons.patch
 Patch1:		%{name}-session-save.patch
 Patch2:		%{name}-add-systemd-support.patch
@@ -41,6 +44,7 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
+Requires:	mate-polkit
 Requires:	upower
 Requires:	xfce4-dirs >= 4.6
 Requires:	xorg-app-iceauth
@@ -120,6 +124,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__sed} -e 's|@LIBDIR@|%{_libdir}|g' %{SOURCE2} > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/xfce4-polkit-mate-authentication-agent-1.desktop
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
