@@ -2,26 +2,24 @@
 # Conditional build:
 %bcond_with	static_libs	# don't build static library
 #
+%define		xfce_version	4.10.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.10.0
-Release:	7
+Version:	4.10.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/xfce/4.10/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	4768e1a41a0287af6aad18b329a0f230
+Source0:	http://archive.xfce.org/src/xfce/%{name}/4.10/%{name}-%{version}.tar.bz2
+# Source0-md5:	1757657c1d590aa6274b7b7cbba33352
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 # taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
 # http://lists.fedoraproject.org/pipermail/devel-announce/2011-February/000758.html
 Source2:        polkit-mate-authentication-agent-1.desktop
 Patch0:		%{name}-ubuntu_icons.patch
-Patch1:		%{name}-session-save.patch
-Patch2:		%{name}-add-systemd-support.patch
-Patch3:		am.patch
-Patch4:		0001-Use-the-async-spawn-function-of-glib.patch
-Patch5:		0002-Store-the-watch-function-id-to-avoid-possible-double.patch
+# be really, really carefull with this, it also makes systemd optional instead of default mandatory
+Patch1:		%{name}-systemd-suspend-hibernate-support.patch
 URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -32,14 +30,14 @@ BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
 BuildRequires:	libwnck2-devel >= 2.22.0
-BuildRequires:	libxfce4ui-devel >= %{version}
-BuildRequires:	libxfce4util-devel >= %{version}
+BuildRequires:	libxfce4ui-devel >= %{xfce_version}
+BuildRequires:	libxfce4util-devel >= %{xfce_version}
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	systemd-devel
-BuildRequires:	xfce4-dev-tools >= 4.10.0
-BuildRequires:	xfconf-devel >= %{version}
+BuildRequires:	xfce4-dev-tools >= %{xfce_version}
+BuildRequires:	xfconf-devel >= %{xfce_version}
 BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk-update-icon-cache
@@ -99,10 +97,6 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %setup -q -a1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 %{__intltoolize}
