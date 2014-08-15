@@ -2,16 +2,16 @@
 # Conditional build:
 %bcond_with	static_libs	# don't build static library
 #
-%define		xfce_version	4.10.0
+%define		xfce_version	4.11.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.10.1
-Release:	2
+Version:	4.11.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/%{name}/4.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	1757657c1d590aa6274b7b7cbba33352
+Source0:	http://archive.xfce.org/src/xfce/%{name}/4.11/%{name}-%{version}.tar.bz2
+# Source0-md5:	8ec8bcedcb9cc28afd345a907a0612c7
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 # taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
@@ -37,7 +37,8 @@ BuildRequires:	polkit-devel
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	systemd-devel
 BuildRequires:	xfce4-dev-tools >= %{xfce_version}
-BuildRequires:	xfconf-devel >= %{xfce_version}
+#BuildRequires:	xfconf-devel >= %{xfce_version}
+BuildRequires:	xfconf-devel >= 4.10.0
 BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk-update-icon-cache
@@ -73,7 +74,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfce4ui-devel >= %{xfce_version}
-Requires:	xfconf-devel >= %{xfce_version}
+#Requires:	xfconf-devel >= %{xfce_version}
+Requires:	xfconf-devel >= 4.10.0
 
 %description devel
 Header files for Xfce Session Manager library.
