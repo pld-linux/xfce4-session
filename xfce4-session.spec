@@ -2,31 +2,29 @@
 # Conditional build:
 %bcond_with	static_libs	# don't build static library
 #
-%define		xfce_version	4.11.0
+%define		xfce_version	4.12.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.11.0
-Release:	2
+Version:	4.12.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/%{name}/4.11/%{name}-%{version}.tar.bz2
-# Source0-md5:	8ec8bcedcb9cc28afd345a907a0612c7
+Source0:	http://archive.xfce.org/src/xfce/%{name}/4.12/%{name}-%{version}.tar.bz2
+# Source0-md5:	f4921fb2e606e74643daf1212263076c
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 # taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
 # http://lists.fedoraproject.org/pipermail/devel-announce/2011-February/000758.html
 Source2:        polkit-mate-authentication-agent-1.desktop
 Patch0:		%{name}-ubuntu_icons.patch
-# be really, really carefull with this, it also makes systemd optional instead of default mandatory
-Patch1:		%{name}-systemd-suspend-hibernate-support.patch
 URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-tools
-BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	gtk+2-devel >= 2:2.24.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
 BuildRequires:	libwnck2-devel >= 2.22.0
@@ -37,8 +35,7 @@ BuildRequires:	polkit-devel
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	systemd-devel
 BuildRequires:	xfce4-dev-tools >= %{xfce_version}
-#BuildRequires:	xfconf-devel >= %{xfce_version}
-BuildRequires:	xfconf-devel >= 4.10.0
+BuildRequires:	xfconf-devel >= %{xfce_version}
 BuildRequires:	xorg-lib-libSM-devel
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk-update-icon-cache
@@ -74,8 +71,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libxfce4ui-devel >= %{xfce_version}
-#Requires:	xfconf-devel >= %{xfce_version}
-Requires:	xfconf-devel >= 4.10.0
+Requires:	xfconf-devel >= %{xfce_version}
 
 %description devel
 Header files for Xfce Session Manager library.
@@ -98,7 +94,6 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %prep
 %setup -q -a1
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -161,6 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/xfce4/Xft.xrdb
 %{_sysconfdir}/xdg/xfce4/xinitrc
 
+%{_datadir}/polkit-1/actions/org.xfce.session.policy
 %{_datadir}/xsessions/xfce.desktop
 %{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
