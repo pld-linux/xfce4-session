@@ -7,7 +7,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.12.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/src/xfce/%{name}/4.12/%{name}-%{version}.tar.bz2
@@ -118,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__sed} -e 's|@LIBDIR@|%{_libdir}|g' %{SOURCE2} > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/xfce4-polkit-mate-authentication-agent-1.desktop
+%{__sed} -e 's|@LIBEXECDIR@|%{_libexecdir}|g' %{SOURCE2} > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/xfce4-polkit-mate-authentication-agent-1.desktop
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
