@@ -6,29 +6,28 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.12.1
-Release:	3
+Version:	4.13.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/%{name}/4.12/%{name}-%{version}.tar.bz2
-# Source0-md5:	f4921fb2e606e74643daf1212263076c
+Source0:	http://archive.xfce.org/src/xfce/%{name}/4.13/%{name}-%{version}.tar.bz2
+# Source0-md5:	0de0afd0c8dfe66f846c6c1c5ff3164a
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 # taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
 # http://lists.fedoraproject.org/pipermail/devel-announce/2011-February/000758.html
 Source2:        polkit-mate-authentication-agent-1.desktop
 Patch0:		%{name}-ubuntu_icons.patch
-Patch1:		verbose-logging.patch
 URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-tools
-BuildRequires:	gtk+2-devel >= 2:2.24.0
+BuildRequires:	gtk+3-devel
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
-BuildRequires:	libwnck2-devel >= 2.22.0
+BuildRequires:	libwnck-devel
 BuildRequires:	libxfce4ui-devel >= %{xfce_version}
 BuildRequires:	libxfce4util-devel >= %{xfce_version}
 BuildRequires:	pkgconfig
@@ -95,7 +94,6 @@ Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 %prep
 %setup -q -a1
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__intltoolize}
