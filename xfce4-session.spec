@@ -6,12 +6,12 @@
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.13.0
+Version:	4.13.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/src/xfce/%{name}/4.13/%{name}-%{version}.tar.bz2
-# Source0-md5:	0de0afd0c8dfe66f846c6c1c5ff3164a
+# Source0-md5:	1306b6166f47cdf6e0c61259abbb621f
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 # taken from mate-polkit (GTK+2), license is LGPLv2+, requires because of
@@ -118,10 +118,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__sed} -e 's|@LIBEXECDIR@|%{_libexecdir}|g' %{SOURCE2} > $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart/xfce4-polkit-mate-authentication-agent-1.desktop
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/session/splash-engines/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ie
 
 %find_lang %{name}
 
@@ -146,11 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xfce4-session-logout
 %attr(755,root,root) %{_bindir}/xfce4-session-settings
 %dir %{_libdir}/xfce4/session
-%attr(755,root,root) %{_libdir}/xfce4/session/balou-export-theme
-%attr(755,root,root) %{_libdir}/xfce4/session/balou-install-theme
 %attr(755,root,root) %{_libdir}/xfce4/session/xfsm-shutdown-helper
-%dir %{_libdir}/xfce4/session/splash-engines
-%attr(755,root,root) %{_libdir}/xfce4/session/splash-engines/*.so
 %{_sysconfdir}/xdg/autostart/*.desktop
 %{_sysconfdir}/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
 %{_sysconfdir}/xdg/xfce4/Xft.xrdb
@@ -158,7 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/polkit-1/actions/org.xfce.session.policy
 %{_datadir}/xsessions/xfce.desktop
-%{_datadir}/themes/Default/balou
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*
 %{_mandir}/man1/*.1*
@@ -171,7 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libxfsm-4.6.so
-%{_includedir}/xfce4/xfce4-session-4.6
+#%{_includedir}/xfce4/xfce4-session-4.6
 %{_pkgconfigdir}/xfce4-session-2.0.pc
 
 %if %{with static_libs}
