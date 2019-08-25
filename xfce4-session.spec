@@ -1,17 +1,13 @@
-#
-# Conditional build:
-%bcond_with	static_libs	# don't build static library
-#
-%define		xfce_version	4.12.0
+%define		xfce_version	4.14.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.13.3
+Version:	4.14.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/%{name}/4.13/%{name}-%{version}.tar.bz2
-# Source0-md5:	94eca4dd2280910292abf9692304ce2c
+Source0:	http://archive.xfce.org/src/xfce/%{name}/4.14/%{name}-%{version}.tar.bz2
+# Source0-md5:	635361f99a01b2d26c430a520b6d1314
 Source1:	http://www.blues.gda.pl/SOURCES/%{name}-ubuntu_icons.tar.bz2
 # Source1-md5:	bf19add3364c0b0d804a7490c1a1fcbe
 Patch0:		%{name}-ubuntu_icons.patch
@@ -34,7 +30,6 @@ BuildRequires:	systemd-devel
 BuildRequires:	xfce4-dev-tools >= %{xfce_version}
 BuildRequires:	xfconf-devel >= %{xfce_version}
 BuildRequires:	xorg-lib-libSM-devel
-Requires:	%{name}-libs = %{version}-%{release}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	upower
@@ -43,6 +38,9 @@ Requires:	xfce-polkit
 Requires:	xorg-app-iceauth
 Obsoletes:	xfce4-toys
 Obsoletes:	xfce-utils
+Obsoletes:	xfce4-session-libs < 4.14.0
+Obsoletes:	xfce4-session-devel < 4.14.0
+Obsoletes:	xfce4-session-static < 4.14.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,43 +48,6 @@ xfce4-session is the session manager for the Xfce desktop environment.
 
 %description -l pl.UTF-8
 xfce4-session jest zarządcą sesji dla środowiska Xfce.
-
-%package libs
-Summary:	Xfce Session Manager library
-Summary(pl.UTF-8):	Biblioteka zarządcy sesji dla środowiska Xfce
-Group:		X11/Libraries
-
-%description libs
-Xfce Session Manager library.
-
-%description libs -l pl.UTF-8
-Biblioteka zarządcy sesji dla środowiska Xfce.
-
-%package devel
-Summary:	Header files for Xfce Session Manager library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce
-Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libxfce4ui-devel >= %{xfce_version}
-Requires:	xfconf-devel >= %{xfce_version}
-
-%description devel
-Header files for Xfce Session Manager library.
-
-%description devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki zarządcy sesji dla środowiska Xfce.
-
-%package static
-Summary:	Static Xfce Session Manager library
-Summary(pl.UTF-8):	Statyczna biblioteka zarządcy sesji dla środowiska Xfce
-Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static Xfce Session Manager library.
-
-%description static -l pl.UTF-8
-Statyczna biblioteka zarządcy sesji dla środowiska Xfce.
 
 %prep
 %setup -q -a1
@@ -113,8 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
-
 # just a copy or ur
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ie
@@ -131,9 +90,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 %update_icon_cache hicolor
-
-%post	libs -p /sbin/ldconfig
-%postun	libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -155,20 +111,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*
 %{_mandir}/man1/*.1*
-
-%files libs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxfsm-4.6.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libxfsm-4.6.so.0
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxfsm-4.6.so
-#%{_includedir}/xfce4/xfce4-session-4.6
-%{_pkgconfigdir}/xfce4-session-2.0.pc
-
-%if %{with static_libs}
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libxfsm-4.6.a
-%endif
