@@ -3,7 +3,7 @@ Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
 Version:	4.14.0
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://archive.xfce.org/src/xfce/%{name}/4.14/%{name}-%{version}.tar.bz2
@@ -47,7 +47,7 @@ xfce4-session is the session manager for the Xfce desktop environment.
 xfce4-session jest zarządcą sesji dla środowiska Xfce.
 
 %prep
-%setup -q -a1
+%setup -q
 
 %build
 %{__intltoolize}
