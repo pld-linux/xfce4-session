@@ -1,13 +1,13 @@
-%define		xfce_version	4.14.0
+%define		xfce_version	4.16.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.14.2
+Version:	4.16.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/%{name}/4.14/%{name}-%{version}.tar.bz2
-# Source0-md5:	5ad23062fd08ef5f5ad9b4389c7b54c6
+Source0:	http://archive.xfce.org/src/xfce/xfce4-session/4.16/%{name}-%{version}.tar.bz2
+# Source0-md5:	2bb95124f91e9469ea5571c94d6034fe
 URL:		http://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -30,14 +30,14 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	upower
-Requires:	xfce4-dirs >= 4.6
 Requires:	xfce-polkit
+Requires:	xfce4-dirs >= 4.6
 Requires:	xorg-app-iceauth
-Obsoletes:	xfce4-toys
 Obsoletes:	xfce-utils
-Obsoletes:	xfce4-session-libs < 4.14.0
-Obsoletes:	xfce4-session-devel < 4.14.0
-Obsoletes:	xfce4-session-static < 4.14.0
+Obsoletes:	xfce4-session-devel < 4.16.0
+Obsoletes:	xfce4-session-libs < 4.16.0
+Obsoletes:	xfce4-session-static < 4.16.0
+Obsoletes:	xfce4-toys
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,8 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # just a copy or ur
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ur_PK
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/ie
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ur_PK
+# unsupported
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{hye,ie}
 # unify
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{hy_AM,hy}
 
@@ -89,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%doc AUTHORS COPYING ChangeLog NEWS TODO
 %attr(755,root,root) %{_bindir}/startxfce4
 %attr(755,root,root) %{_bindir}/xflock4
 %attr(755,root,root) %{_bindir}/xfce4-session
