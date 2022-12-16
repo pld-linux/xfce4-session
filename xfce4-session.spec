@@ -1,14 +1,14 @@
-%define		xfce_version	4.16.0
+%define		xfce_version	4.18.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.16.0
+Version:	4.18.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/xfce/xfce4-session/4.16/%{name}-%{version}.tar.bz2
-# Source0-md5:	2bb95124f91e9469ea5571c94d6034fe
-URL:		http://www.xfce.org/projects/xfce4-session
+Source0:	https://archive.xfce.org/src/xfce/xfce4-session/4.18/%{name}-%{version}.tar.bz2
+# Source0-md5:	3595cfdf4ba238052642c9e372e481f1
+URL:		https://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
@@ -22,7 +22,7 @@ BuildRequires:	libxfce4ui-devel >= %{xfce_version}
 BuildRequires:	libxfce4util-devel >= %{xfce_version}
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel
-BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	rpmbuild(macros) >= 2.000
 BuildRequires:	systemd-devel
 BuildRequires:	xfce4-dev-tools >= %{xfce_version}
 BuildRequires:	xfconf-devel >= %{xfce_version}
@@ -73,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 # just a copy or ur
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ur_PK
 # unsupported
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{hye,ie}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{fa_IR,hye,ie}
 # unify
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{hy_AM,hy}
 
