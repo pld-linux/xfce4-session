@@ -1,25 +1,26 @@
-%define		xfce_version	4.18.0
+%define		xfce_version	4.20.0
 Summary:	Xfce session manager
 Summary(pl.UTF-8):	Zarządca sesji Xfce
 Name:		xfce4-session
-Version:	4.18.4
+Version:	4.20.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	https://archive.xfce.org/src/xfce/xfce4-session/4.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	620c369a44c6b866c80d31e4685d6bef
+Source0:	https://archive.xfce.org/src/xfce/xfce4-session/4.20/%{name}-%{version}.tar.bz2
+# Source0-md5:	f98b892974a489120ccdddf442ca00fa
 URL:		https://www.xfce.org/projects/xfce4-session
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	dbus-devel >= 1.0.0
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-tools
-BuildRequires:	gtk+3-devel
+BuildRequires:	gtk+3-devel >= 3.24.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libtool
 BuildRequires:	libwnck-devel
-BuildRequires:	libxfce4ui-devel >= 4.18.2
+BuildRequires:	libxfce4ui-devel >= 4.20.0
 BuildRequires:	libxfce4util-devel >= %{xfce_version}
+BuildRequires:	libxfce4windowing-devel >= %{xfce_version}
 BuildRequires:	pkgconfig
 BuildRequires:	polkit-devel
 BuildRequires:	rpmbuild(macros) >= 2.000
@@ -50,7 +51,6 @@ xfce4-session jest zarządcą sesji dla środowiska Xfce.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
@@ -60,7 +60,7 @@ xfce4-session jest zarządcą sesji dla środowiska Xfce.
 	--enable-systemd \
 	%{!?with_static_libs:--disable-static} \
 	--disable-silent-rules \
-	ICEAUTH=/usr/bin/iceauth
+	ICEAUTH=%{_bindir}/iceauth
 
 %{__make}
 
@@ -73,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 # just a copy or ur
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ur_PK
 # unsupported
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{fa_IR,hye,ie}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{az_AZ,fa_IR,hye,ie}
 # unify
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{hy_AM,hy}
 
@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS TODO
+%doc AUTHORS COPYING NEWS README.md
 %attr(755,root,root) %{_bindir}/startxfce4
 %attr(755,root,root) %{_bindir}/xflock4
 %attr(755,root,root) %{_bindir}/xfce4-session
@@ -98,7 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xfce4-session-settings
 %dir %{_libdir}/xfce4/session
 %attr(755,root,root) %{_libdir}/xfce4/session/xfsm-shutdown-helper
-%{_sysconfdir}/xdg/autostart/*.desktop
+#%{_sysconfdir}/xdg/autostart/*.desktop
+%{_datadir}/wayland-sessions/xfce-wayland.desktop
 %{_sysconfdir}/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
 %{_sysconfdir}/xdg/xfce4/Xft.xrdb
 %{_sysconfdir}/xdg/xfce4/xinitrc
